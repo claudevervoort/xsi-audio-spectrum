@@ -12,3 +12,5 @@ fft_wav_main: application - very basic OpenGL visualization tool, mostly used fo
 wavespectrum_icenode: dll, Softimage XSI Plug-in: the actual custom ICE node using fft_wav_analyzer lib
 
 The add-on is ready to be used, compiled 64 bits with Softimage 2012 Sub. Adv. Pack
+
+There are video tutorial on the plugin on Vimeo https://vimeo.com/41955919 and on my own website: http://claudeonthe.net
