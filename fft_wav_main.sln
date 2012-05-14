@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "fft_wav_main", "fft_wav_main\fft_wav_main.vcxproj", "{BFF72BB7-E31B-45CB-8DF2-F8F2FBB351C4}"
+	ProjectSection(ProjectDependencies) = postProject
+		{C73AB195-B73A-4A92-9A4D-F82E0EB50627} = {C73AB195-B73A-4A92-9A4D-F82E0EB50627}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "fft_wav_analyzer", "fft_wav_analyzer\fft_wav_analyzer.vcxproj", "{C73AB195-B73A-4A92-9A4D-F82E0EB50627}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WaveToSpectrum", "wavespectrum_icenode\WaveToSpectrum.vcxproj", "{38E3212A-A328-4C37-BF8A-E748D81548F9}"
+	ProjectSection(ProjectDependencies) = postProject
+		{C73AB195-B73A-4A92-9A4D-F82E0EB50627} = {C73AB195-B73A-4A92-9A4D-F82E0EB50627}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Debug|x64 = Debug|x64
+		Release|Win32 = Release|Win32
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BFF72BB7-E31B-45CB-8DF2-F8F2FBB351C4}.Debug|Win32.ActiveCfg = Debug|Win32
+		{BFF72BB7-E31B-45CB-8DF2-F8F2FBB351C4}.Debug|Win32.Build.0 = Debug|Win32
+		{BFF72BB7-E31B-45CB-8DF2-F8F2FBB351C4}.Debug|x64.ActiveCfg = Debug|Win32
+		{BFF72BB7-E31B-45CB-8DF2-F8F2FBB351C4}.Release|Win32.ActiveCfg = Release|Win32
+		{BFF72BB7-E31B-45CB-8DF2-F8F2FBB351C4}.Release|Win32.Build.0 = Release|Win32
+		{BFF72BB7-E31B-45CB-8DF2-F8F2FBB351C4}.Release|x64.ActiveCfg = Release|Win32
+		{C73AB195-B73A-4A92-9A4D-F82E0EB50627}.Debug|Win32.ActiveCfg = Debug|Win32
+		{C73AB195-B73A-4A92-9A4D-F82E0EB50627}.Debug|Win32.Build.0 = Debug|Win32
+		{C73AB195-B73A-4A92-9A4D-F82E0EB50627}.Debug|x64.ActiveCfg = Debug|x64
+		{C73AB195-B73A-4A92-9A4D-F82E0EB50627}.Debug|x64.Build.0 = Debug|x64
+		{C73AB195-B73A-4A92-9A4D-F82E0EB50627}.Release|Win32.ActiveCfg = Release|Win32
+		{C73AB195-B73A-4A92-9A4D-F82E0EB50627}.Release|Win32.Build.0 = Release|Win32
+		{C73AB195-B73A-4A92-9A4D-F82E0EB50627}.Release|x64.ActiveCfg = Release|Win32
+		{38E3212A-A328-4C37-BF8A-E748D81548F9}.Debug|Win32.ActiveCfg = Debug|Win32
+		{38E3212A-A328-4C37-BF8A-E748D81548F9}.Debug|Win32.Build.0 = Debug|Win32
+		{38E3212A-A328-4C37-BF8A-E748D81548F9}.Debug|x64.ActiveCfg = Debug|x64
+		{38E3212A-A328-4C37-BF8A-E748D81548F9}.Debug|x64.Build.0 = Debug|x64
+		{38E3212A-A328-4C37-BF8A-E748D81548F9}.Release|Win32.ActiveCfg = Release|Win32
+		{38E3212A-A328-4C37-BF8A-E748D81548F9}.Release|Win32.Build.0 = Release|Win32
+		{38E3212A-A328-4C37-BF8A-E748D81548F9}.Release|x64.ActiveCfg = Release|x64
+		{38E3212A-A328-4C37-BF8A-E748D81548F9}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
