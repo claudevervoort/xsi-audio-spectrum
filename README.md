@@ -10,7 +10,7 @@ Limitations
 -----------
 
 Loads all Wave file in memory.
-Limited testing (let me know if it fails, send the scene along: claude.vervoort at gmail dot com.
+Very Limited testing; let me know if it fails, send the scene along: claude.vervoort at gmail dot com.
 
 What's in it?
 -------------
