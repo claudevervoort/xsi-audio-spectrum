@@ -4,7 +4,7 @@ xsi-audio-spectrum
 What is it?
 -----------
 
-Softimage ICE Node to get the Spectrum from a Wave file.
+Softimage ICE Node to get the Spectrum from a Wave file. Demo: https://vimeo.com/41955919
 
 Limitations
 -----------
