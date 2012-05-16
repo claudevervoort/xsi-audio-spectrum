@@ -15,7 +15,7 @@ Very Limited testing; let me know if it fails, send the scene along: claude.verv
 What's in it?
 -------------
 
-3 projects:
+3 Visual Studio 2010 projects:
 
 * fft_wav_analyzer: static lib - for Wave Loading and FFT decomposition using Kiss FFT
 
@@ -46,6 +46,11 @@ Feedback
 
 Let me know if anything I've used is not the 'proper'/'best' way to do it. I love to learn!
 
+Thanks
+------
+KISS FFT: http://sourceforge.net/projects/kissfft/
+Wave Loader code from http://www.codeproject.com/Articles/29676/CWave-A-Simple-C-Class-to-Manipulate-WAV-Files
+Wave file format info from http://www.sonicspot.com/guide/wavefiles.html
 
 Rights?
 ------
