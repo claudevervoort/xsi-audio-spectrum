@@ -248,7 +248,7 @@ SICALLBACK WaveToSpectrum_ComputeFFT( ICENodeContext& in_ctxt )
       // Should be unique since Singleton context
       for(CIndexSet::Iterator it = indexSet.Begin(); it.HasNext(); it.Next())
       {
-        long channel = channelData[ it ];
+        int channel = static_cast<int>( channelData[ it ] );
         float time =  timeData[ it ];
         if ( time <0 || channel > 1 || channel <-1 )
         {
