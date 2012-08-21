@@ -27,7 +27,7 @@ How to use it
 --------------
 
 I have some issues creating an add-on with the release version of the DLL, so in the meantime you can try adding 
-the WaveToSpectrun directly (using the add plug-in in Softimage).
+the WaveToSpectrun directly (using the add plug-in in Softimage) - or download from http://claudeonthe.net/si/WaveToSpectrum.dll
 
 DO NOT USE ADD ON... CONTAINS DEBUG VERSION OF DLL THAT DOES NOT SEEM TO WORK WITHOUT VISUAL STUDIO 
 The add-on is ready to be used, compiled 64 bits with Softimage 2012 Sub. Adv. Pack. Just add it to Softimage and 
