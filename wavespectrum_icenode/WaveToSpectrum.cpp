@@ -5,7 +5,7 @@
 // 
 // Claude Vervoort, http://claudeonthe.net 
 // 
-#define _HAS_ITERATOR_DEBUGGING 1
+//s#define _HAS_ITERATOR_DEBUGGING 1
 
 #include <xsi_application.h>
 #include <xsi_context.h>
