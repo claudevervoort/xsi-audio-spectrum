@@ -94,6 +94,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <AdditionalIncludeDirectories>..\fft_wav_analyzer\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <OutputFile>.\bin\nt-x86-64\WaveToSpectrum.dll</OutputFile>

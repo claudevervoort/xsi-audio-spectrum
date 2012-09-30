@@ -5,7 +5,7 @@
 // 
 // Claude Vervoort, http://claudeonthe.net 
 // 
-//s#define _HAS_ITERATOR_DEBUGGING 1
+//#define _HAS_ITERATOR_DEBUGGING 1 uncomment for debug build
 
 #include <xsi_application.h>
 #include <xsi_context.h>
@@ -35,6 +35,9 @@
 #include <xsi_dataarray2D.h>
 
 #include "WaveSpectrumAnalyzer.h"
+
+#include <sstream>
+#include <string>
 
 // For storing CSampleData user data objects
 #include <vector>
@@ -147,13 +150,13 @@ CStatus RegisterWaveToSpectrum( PluginRegistrar& in_reg )
 	st = nodeDef.AddInputPort(ID_IN_filepath,ID_G_100,siICENodeDataString,siICENodeStructureSingle,siICENodeContextSingleton,L"filepath",L"filepath",L"default string",CValue(),CValue(),ID_UNDEF,ID_UNDEF,ID_CTXT_CNS);
 	st.AssertSucceeded( ) ;
 
-	st = nodeDef.AddInputPort(ID_IN_channel,ID_G_100,siICENodeDataLong,siICENodeStructureSingle,siICENodeContextSingleton,L"channel",L"channel",0,CValue(),CValue(),ID_UNDEF,ID_UNDEF,ID_CTXT_CNS);
+	st = nodeDef.AddInputPort(ID_IN_channel,ID_G_100,siICENodeDataLong,siICENodeStructureSingle,siICENodeContextSingleton,L"channel[-1:both;0;1]",L"channel",0,CValue(),CValue(),ID_UNDEF,ID_UNDEF,ID_CTXT_CNS);
 	st.AssertSucceeded( ) ;
 
 	st = nodeDef.AddInputPort(ID_IN_time,ID_G_100,siICENodeDataFloat,siICENodeStructureSingle,siICENodeContextSingleton,L"time",L"time",0,CValue(),CValue(),ID_UNDEF,ID_UNDEF,ID_CTXT_CNS);
 	st.AssertSucceeded( ) ;
 
-  st = nodeDef.AddInputPort(ID_IN_frequency,ID_G_100,siICENodeDataFloat,siICENodeStructureSingle,siICENodeContextAny,L"frequency",L"frequency",0,CValue(),CValue(),ID_UNDEF,ID_UNDEF,ID_CTXT_CNS_ANY);
+  st = nodeDef.AddInputPort(ID_IN_frequency,ID_G_100,siICENodeDataFloat,siICENodeStructureSingle,siICENodeContextAny,L"frequency[0-1]",L"frequency",0,CValue(),CValue(),ID_UNDEF,ID_UNDEF,ID_CTXT_CNS_ANY);
 	st.AssertSucceeded( ) ;
 
 	// Add output ports.
@@ -285,58 +288,81 @@ SICALLBACK WaveToSpectrum_ComputeFFT( ICENodeContext& in_ctxt )
 
 SICALLBACK WaveToSpectrum_Evaluate( ICENodeContext& in_ctxt )
 {
-
   ULONG nPhase = in_ctxt.GetEvaluationPhaseIndex( );
-  if ( 0 == nPhase )
-  {
-    return WaveToSpectrum_ComputeFFT( in_ctxt );
-  }
-	// Get the user data that we allocated in BeginEvaluate
-  SpectrumUserData* userData = ( SpectrumUserData* ) ( CValue::siPtrType ) in_ctxt.GetUserData( );
+  try {
+    if ( 0 == nPhase )
+    {
+      return WaveToSpectrum_ComputeFFT( in_ctxt );
+    }
+	  // Get the user data that we allocated in BeginEvaluate
+    SpectrumUserData* userData = ( SpectrumUserData* ) ( CValue::siPtrType ) in_ctxt.GetUserData( );
 
-	// The current output port being evaluated...
-	ULONG out_portID = in_ctxt.GetEvaluatedOutputPortID( );
-  bool allBands = (ID_OUT_linearBands == out_portID ) || (  ID_OUT_logBands == out_portID );
-  bool linear = ( out_portID == ID_OUT_linear ) || ( out_portID == ID_OUT_linearBands );
-  WaveSpectrumAnalyzer* spectrumAnalyzer = linear?userData->linearAnalyzer:userData->logAnalyzer;
-  CIndexSet indexSet( in_ctxt );
-  if ( allBands )
-  {
-    CDataArray2DFloat outData( in_ctxt );
-    for(CIndexSet::Iterator it = indexSet.Begin(); it.HasNext(); it.Next())
+	  // The current output port being evaluated...
+	  ULONG out_portID = in_ctxt.GetEvaluatedOutputPortID( );
+    bool allBands = (ID_OUT_linearBands == out_portID ) || (  ID_OUT_logBands == out_portID );
+    bool linear = ( out_portID == ID_OUT_linear ) || ( out_portID == ID_OUT_linearBands );
+    WaveSpectrumAnalyzer* spectrumAnalyzer = linear?userData->linearAnalyzer:userData->logAnalyzer;
+    CIndexSet indexSet( in_ctxt );
+    if ( allBands )
     {
-      float* bands = spectrumAnalyzer->getFFTBands( ) ;
-      CDataArray2DFloat::Accessor outAccessor = outData.Resize( it, spectrumAnalyzer->getNumberOfBands( ) );
-	    for (int i=0; i<spectrumAnalyzer->getNumberOfBands( ); ++i )
-	    {	
-		    outAccessor[i] = ( NULL == bands )?0:bands[i];
-	    }
-    }
-  }
-  else
-  {
-    // frequency should be a normalized value 0-1, and what is returned is a linear interpolation
-    // of the value at that frequency location.
-    CDataArrayFloat outData( in_ctxt );
-    CDataArrayFloat frequency( in_ctxt, ID_IN_frequency );
-    for(CIndexSet::Iterator it = indexSet.Begin(); it.HasNext(); it.Next())
-    {
-      float* bands = spectrumAnalyzer->getFFTBands( ) ;
-      // find the upper and lower bands then linear interpolation
-      float bandIndex = frequency[ it ] * spectrumAnalyzer->getNumberOfBands( );
-      bandIndex = ( bandIndex < 0 )?0:bandIndex;
-      int lowerIndex = ( int ) bandIndex;
-      if ( lowerIndex + 1 >= spectrumAnalyzer->getNumberOfBands( ) )
+      CDataArray2DFloat outData( in_ctxt );
+      for(CIndexSet::Iterator it = indexSet.Begin(); it.HasNext(); it.Next())
       {
-        outData[ it ] = bands[ spectrumAnalyzer->getNumberOfBands( ) - 1 ];
-      }
-      else
-      {
-        float interp = bandIndex - lowerIndex;
-        outData[ it ] = bands[ lowerIndex ] * ( 1 - interp ) + bands[ lowerIndex + 1 ] * interp; 
+        float* bands = spectrumAnalyzer->getFFTBands( ) ;
+        CDataArray2DFloat::Accessor outAccessor = outData.Resize( it, spectrumAnalyzer->getNumberOfBands( ) );
+	      for (int i=0; i<spectrumAnalyzer->getNumberOfBands( ); ++i )
+	      {	
+		      outAccessor[i] = ( NULL == bands )?0:bands[i];
+	      }
       }
     }
+    else
+    {
+      // frequency should be a normalized value 0-1, and what is returned is a linear interpolation
+      // of the value at that frequency location.
+      CDataArrayFloat outData( in_ctxt );
+      CDataArrayFloat frequency( in_ctxt, ID_IN_frequency );
+      for(CIndexSet::Iterator it = indexSet.Begin(); it.HasNext(); it.Next())
+      {
+        float* bands = spectrumAnalyzer->getFFTBands( ) ;
+        // find the upper and lower bands then linear interpolation
+        float bandIndex = frequency[ it ] * spectrumAnalyzer->getNumberOfBands( );
+        bandIndex = ( bandIndex < 0 )?0:bandIndex;
+        int lowerIndex = ( int ) bandIndex;
+        if ( lowerIndex + 1 >= spectrumAnalyzer->getNumberOfBands( ) )
+        {
+          outData[ it ] = bands[ spectrumAnalyzer->getNumberOfBands( ) - 1 ];
+        }
+        else
+        {
+          float interp = bandIndex - lowerIndex;
+          outData[ it ] = bands[ lowerIndex ] * ( 1 - interp ) + bands[ lowerIndex + 1 ] * interp; 
+        }
+      }
+    }
+  } 
+  catch (const std::exception& ex) 
+  {
+    std::stringstream ss;
+    ss << "An exception occurred during evaluation, phase: " << nPhase << " ex: " << ex.what();
+    Application( ).LogMessage( ss.str().c_str());
+    return CStatus::False;
+  } 
+  catch (const std::string& ex) 
+  {
+    std::stringstream ss;
+    ss << "An exception occurred during evaluation, phase: " << nPhase << " ex: " << ex;
+    Application( ).LogMessage( ss.str().c_str() );
+    return CStatus::False;
+  } 
+  catch (...) 
+  {
+    std::stringstream ss;
+    ss << "An exception occurred during evaluation, phase: " << nPhase ;
+    Application( ).LogMessage( ss.str().c_str() );
+    return CStatus::False;
   }
+
   return CStatus::OK;
 }
 
