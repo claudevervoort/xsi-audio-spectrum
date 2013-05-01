@@ -112,6 +112,7 @@ BOOL WaveLoader::getNextBlocks( int maxNumBlocks, LPSTR & dataPtr, DWORD_PTR & s
 
 BOOL WaveLoader::getBlocks( int startBlockIndex, int maxNumBlocks, LPSTR & dataPtr, DWORD_PTR & size )
 {
+  startBlockIndex = max(startBlockIndex, 0);
   dataPtr = (LPSTR)_lpData + ( startBlockIndex * _format.blockAlign );
   startBlockIndex+=maxNumBlocks;
   if ( startBlockIndex < _totalOfBlocks )

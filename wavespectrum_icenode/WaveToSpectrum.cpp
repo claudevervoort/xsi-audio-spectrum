@@ -10,7 +10,7 @@
 // Claude Vervoort, http://claudeonthe.net 
 // 
 // uncomment for debug build
-#define _HAS_ITERATOR_DEBUGGING 1 
+// #define _HAS_ITERATOR_DEBUGGING 1 
 
 #include <xsi_application.h>
 #include <xsi_context.h>
@@ -264,9 +264,10 @@ SICALLBACK WaveToSpectrum_ComputeFFT( ICENodeContext& in_ctxt )
       {
         int channel = static_cast<int>( channelData[ it ] );
         float time =  timeData[ it ];
-        if ( time <0 || channel > 1 || channel <-1 )
+        time = max(0, time);
+        if ( channel > 1 || channel <-1 )
         {
-            Application( ).LogMessage( "Incorrect parameters time[ " + CString( time ) + "] channelData (-1,0,1) [ " + CString(channel) + "]"  );
+            Application( ).LogMessage( "Incorrect parameters channelData (-1,0,1) [ " + CString(channel) + "]"  );
              return CStatus::InvalidArgument;
         }
         if ( NULL == spectrumAnalyzer )
