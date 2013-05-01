@@ -27,11 +27,15 @@ How to use it
 --------------
 
 I have some issues creating an add-on with the release version of the DLL, so in the meantime you can try adding 
-the WaveToSpectrun directly (using the add plug-in in Softimage) - or download from http://claudeonthe.net/si/WaveToSpectrum.dll
+the WaveToSpectrun directly (using the add plug-in in Softimage), the most up to date DLL is at the root of this project 
+- or download from http://claudeonthe.net/si/WaveToSpectrum.dll
 
-DO NOT USE ADD ON... CONTAINS DEBUG VERSION OF DLL THAT DOES NOT SEEM TO WORK WITHOUT VISUAL STUDIO 
-The add-on is ready to be used, compiled 64 bits with Softimage 2012 Sub. Adv. Pack. Just add it to Softimage and 
-you should get a new Custom ICE Node.
+DO NOT USE ADD ON... CONTAINS DEBUG VERSION OF DLL THAT DOES NOT SEEM TO WORK WITHOUT VISUAL STUDIO unless you have
+the proper VC++ environment. I'm having issues trying to build an add-on with the release version. Still scratching
+my head on that one. Will update here when/if I figure it out.
+
+Tip to create the Wave: there is more than one Wave, and guess what, this is using the most basic one. So if your wave
+does not work, here is what gave me good results: using the I-Tunes Wave Encoder.
 
 
 Beware/Disclaimer
