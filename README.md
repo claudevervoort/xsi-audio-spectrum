@@ -6,11 +6,19 @@ What is it?
 
 Softimage ICE Node to get the Spectrum from a Wave file. Demo: https://vimeo.com/41955919
 
+Demo Scene: http://claudeonthe.net/si/spectrum.wav
+
 Limitations
 -----------
 
+64 bits - Windows
 Loads all Wave file in memory.
 Very Limited testing; let me know if it fails, send the scene along: claude.vervoort at gmail dot com.
+
+Also this is a hobby of mine, and my first attempt to any non-trivial plugin, so rough on the edges (still scratching my
+head on some of the SI failures).
+
+Finally no add-on yet. I have still not been able to truly understand the packaging.
 
 What's in it?
 -------------
@@ -41,7 +49,7 @@ does not work, here is what gave me good results: using the I-Tunes Wave Encoder
 Beware/Disclaimer
 -----------------
 
-I would not qualify myself as a C++ expert or a Softimage SDK wizard. Well wizard maybe in the sense that I got it to work somehow :)
+Again, I would not qualify myself as a C++ expert or a Softimage SDK wizard. Well wizard maybe in the sense that I got it to work somehow :)
 
 
 How-to?
