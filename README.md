@@ -23,8 +23,6 @@ Very Limited testing; let me know if it fails, send the scene along: claude.verv
 Also this is a hobby of mine, and my first attempt to any non-trivial plugin, so rough on the edges (still scratching my
 head on some of the SI failures).
 
-Finally no add-on yet. I have still not been able to truly understand the packaging.
-
 What's in it?
 -------------
 
@@ -39,11 +37,7 @@ What's in it?
 How to use it
 --------------
 
-I have some issues creating an add-on with the release version of the DLL, so in the meantime you can try adding 
-the WaveToSpectrun directly (using the add plug-in in Softimage), the most up to date DLL is at the root of this project.
-
-DO NOT USE ADD ON... CONTAINS DEBUG VERSION OF DLL THAT DOES NOT SEEM TO WORK WITHOUT VISUAL STUDIO unless you have
-the proper VC++ environment.
+You can either install the Add-On or directly install the DLL as a plugin.
 
 Tip to create the Wave: there is more than one Wave, and guess what, this is using the most basic one. So if your wave
 does not work, here is what gave me good results: using the I-Tunes Wave Encoder.
