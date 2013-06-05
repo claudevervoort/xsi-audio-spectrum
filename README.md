@@ -4,15 +4,20 @@ xsi-audio-spectrum
 What is it?
 -----------
 
-Softimage ICE Node to get the Spectrum from a Wave file. Demo: https://vimeo.com/41955919
+Softimage ICE Node to get the Spectrum from a Wave file. 
 
-Demo Scene: http://claudeonthe.net/si/spectrum.wav
+Demo: https://vimeo.com/41955919
+
+Blog post: http://www.claudeonthe.net/blog/?p=137
+
+Demo Scene: http://claudeonthe.net/si/spectrum.zip
 
 Limitations
 -----------
 
 64 bits - Windows
 Loads all Wave file in memory.
+Only WAVe, but not all Waves...
 Very Limited testing; let me know if it fails, send the scene along: claude.vervoort at gmail dot com.
 
 Also this is a hobby of mine, and my first attempt to any non-trivial plugin, so rough on the edges (still scratching my
@@ -35,12 +40,10 @@ How to use it
 --------------
 
 I have some issues creating an add-on with the release version of the DLL, so in the meantime you can try adding 
-the WaveToSpectrun directly (using the add plug-in in Softimage), the most up to date DLL is at the root of this project 
-- or download from http://claudeonthe.net/si/WaveToSpectrum.dll
+the WaveToSpectrun directly (using the add plug-in in Softimage), the most up to date DLL is at the root of this project.
 
 DO NOT USE ADD ON... CONTAINS DEBUG VERSION OF DLL THAT DOES NOT SEEM TO WORK WITHOUT VISUAL STUDIO unless you have
-the proper VC++ environment. I'm having issues trying to build an add-on with the release version. Still scratching
-my head on that one. Will update here when/if I figure it out.
+the proper VC++ environment.
 
 Tip to create the Wave: there is more than one Wave, and guess what, this is using the most basic one. So if your wave
 does not work, here is what gave me good results: using the I-Tunes Wave Encoder.
