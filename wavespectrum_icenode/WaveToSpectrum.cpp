@@ -119,7 +119,7 @@ SICALLBACK XSILoadPlugin( PluginRegistrar& in_reg )
 {
 	in_reg.PutAuthor(L"Claude Vervoort");
 	in_reg.PutName(L"WaveToSpectrum Plugin");
-	in_reg.PutVersion(1,0);
+	in_reg.PutVersion(1,1);
 
 	RegisterWaveToSpectrum( in_reg );
 
@@ -268,7 +268,7 @@ SICALLBACK WaveToSpectrum_ComputeFFT( ICENodeContext& in_ctxt )
         if ( channel > 1 || channel <-1 )
         {
             Application( ).LogMessage( "Incorrect parameters channelData (-1,0,1) [ " + CString(channel) + "]"  );
-             return CStatus::InvalidArgument;
+             return CStatus::False;
         }
         if ( NULL == spectrumAnalyzer )
         {
@@ -295,7 +295,7 @@ SICALLBACK WaveToSpectrum_ComputeFFT( ICENodeContext& in_ctxt )
   }
   // Is there a better way to indicate an error?
   Application( ).LogMessage( "File could not be loaded" );
-  return CStatus::InvalidArgument;
+  return CStatus::False;
 }
 
 SICALLBACK WaveToSpectrum_Evaluate( ICENodeContext& in_ctxt )
